@@ -14,8 +14,6 @@ export default function Schedule({programs}){
             );
         })
     );
-
-    //return null;
 }
 
 
@@ -44,7 +42,6 @@ class ProgramObject extends React.Component{
             </View>
             </ScrollView>
         );
-        //return null;
     }
 
 }
@@ -89,11 +86,3 @@ const styles = StyleSheet.create(
         },
     }
 );
-
-
-// const {
-//     data: {
-//       main: { temp },
-//       weather
-//     }
-//   }
