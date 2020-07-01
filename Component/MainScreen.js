@@ -44,12 +44,12 @@ export default class Mainscreen extends React.Component{
         //    </View>
         // </ScrollView>
         <ScrollView>
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
             <View>
                 <Text></Text>
             </View>
             <TimeTable  time={time} />
-        </View>
+        </View> */}
         <View>
             <Schedule programs={programs} />
 
