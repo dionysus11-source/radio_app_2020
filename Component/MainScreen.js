@@ -3,8 +3,6 @@ import {View,ScrollView} from 'react-native';
 import {Icon, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
 import Loading from "./Loading.js"
-import Radio from "./Navigator.js"
-import TimeTable from "./TimeTable.js"
 import Schedule from "./Schedule.js"
 import axios from "axios";
 
@@ -13,13 +11,17 @@ export default class Mainscreen extends React.Component{
     static navigationOptions = {
         headerLeft:<Icon name='ios-camera' style={{paddingLeft:20}} />,
         headerTitleStyle : {alignSelf : 'center'},
-        title : "Radio Information",
-        headerRight:<Icon name='ios-send' style={{paddingRight:20}}/>,
+        title : "Radio",
+        headerRight:<Icon name='ios-send' onPress={() => {
+            const {location} = this.state}
+        } style={{paddingRight:20}} />,
     }
     state={
         isLoading : true,
+        location : "경기도",
     }
     getRadio = async(location) => {
+        console.log("GetRadio is called");
         const{
             data:{
             programs,
@@ -29,7 +31,7 @@ export default class Mainscreen extends React.Component{
         this.setState({isLoading:false, programs:programs, time: time});
     };
     componentDidMount(){
-        location = "경기도";
+        const {location} = this.state;
         this.getRadio(location);
     };
     render(){
