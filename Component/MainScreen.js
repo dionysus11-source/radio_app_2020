@@ -8,20 +8,21 @@ import axios from "axios";
 
 
 export default class Mainscreen extends React.Component{
-    static navigationOptions = {
-        headerLeft:<Icon name='ios-camera' style={{paddingLeft:20}} />,
-        headerTitleStyle : {alignSelf : 'center'},
-        title : "Radio",
-        headerRight:<Icon name='ios-send' onPress={() => {
-            const {location} = this.state}
-        } style={{paddingRight:20}} />,
-    }
+    static navigationOptions = ({navigation}) =>{
+        const {params={}} = navigation.state;
+        console.log(navigation);
+        return {
+            headerLeft:<Icon name='ios-navigate' style={{paddingLeft:20}} />,
+            headerTitleStyle : {alignSelf : 'center'},
+            title : "Radio",
+            headerRight:<Icon name='ios-refresh' onPress={params.refreshPage} style={{paddingRight:20}} />,
+        };
+    };
     state={
         isLoading : true,
         location : "경기도",
     }
     getRadio = async(location) => {
-        console.log("GetRadio is called");
         const{
             data:{
             programs,
@@ -30,20 +31,25 @@ export default class Mainscreen extends React.Component{
         }   = await axios.get(`http://dionysus11.asuscomm.com:2020/getRadioProgram/${location}`);
         this.setState({isLoading:false, programs:programs, time: time});
     };
+    refreshPage = () =>{
+        const {location} = this.state;
+        console.log("refreshpage is called");
+        this.setState({isLoading:true});
+        this.getRadio(location);
+    };
     componentDidMount(){
         const {location} = this.state;
+        this.props.navigation.setParams({
+            isLoading : this.state.isLoading,
+            location : this.state.location,
+            refreshPage : this.refreshPage,
+        });
         this.getRadio(location);
     };
     render(){
         const {isLoading, programs, time} = this.state;
         return isLoading? <Loading />: 
         <ScrollView>
-        {/* <View style={styles.container}>
-            <View>
-                <Text></Text>
-            </View>
-            <TimeTable  time={time} />
-        </View> */}
         <View>
             <Schedule programs={programs} />
         </View>
