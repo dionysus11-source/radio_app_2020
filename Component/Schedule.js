@@ -50,7 +50,7 @@ class ScheduleObject extends React.Component{
     
     render(){
         const {schedules} = this.props;
-        console.log(schedules);
+        //console.log(schedules);
         return(
             schedules.map(tt=>{
                 return (
