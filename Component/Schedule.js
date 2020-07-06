@@ -31,9 +31,9 @@ class ProgramObject extends React.Component{
             }
         } = this.props;
         return(
-            <ScrollView horizontal = {true}>
+            <ScrollView  horizontal = {true}>
             <View style={styles.container}>
-                <View>
+                <View style = {styles.channelcontainer}> 
                 <Text>{channel}</Text>
                 </View>
                 <View style={styles.container}>
@@ -54,7 +54,9 @@ class ScheduleObject extends React.Component{
         return(
             schedules.map(tt=>{
                 return (
-                    <ScheduleList  schedule={tt} />
+                    <View style = {styles.childcontainer}>
+                    <ScheduleList schedule={tt} />
+                    </View>
                 );
             })
         );
@@ -67,8 +69,8 @@ class ScheduleList extends React.Component{
     render(){
         const {schedule} = this.props;
         return(
-            <View>
-                <Text>{schedule}</Text>    
+            <View >
+                <Text style = {styles.textstyle}>{schedule}</Text>    
             </View>
         );
     }
@@ -82,7 +84,51 @@ const styles = StyleSheet.create(
             flexDirection : 'row',
             alignItems:'center',
             justifyContent:'space-between',
-            padding : 5,
+            padding : 0,
         },
+        program : {
+            flex : 1,
+            paddingLeft : 5,
+            paddingTop : 3,
+            paddingBottom : 3,
+            paddingRight : 5
+        },
+        channelcontainer:{
+            paddingLeft : 10,
+            paddingTop : 10,
+            paddingBottom : 3,
+            paddingRight : 5,
+            //margin : 1,
+            flex:1,
+            height: 60,
+            backgroundColor : 'white',
+            borderBottomColor : "gray",
+            borderBottomWidth : 1,
+            borderRightColor : "gray",
+            borderRightWidth : 1,
+        },
+        textstyle : {
+            color : "blue",
+        },
+        childcontainer : {
+            paddingLeft : 10,
+            paddingTop : 10,
+            paddingBottom : 3,
+            paddingRight : 5,
+            flex:1,
+            height: 60,
+            backgroundColor : '#FFFFF0',
+            borderBottomColor : "gray",
+            borderBottomWidth : 1,
+            borderRightColor : "gray",
+            borderRightWidth : 1,
+            // borderLeftColor : "gray",
+            // borderLeftWidth : 1,
+            // borderTopColor : "gray",
+            // borderTopWidth : 1,
+            //borderWidth : 1,
+            //borderColor : "gray",
+            //borderStyle : "solid",
+        }
     }
 );
