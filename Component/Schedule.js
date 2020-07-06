@@ -31,7 +31,7 @@ class ProgramObject extends React.Component{
             }
         } = this.props;
         return(
-            <ScrollView horizontal = {true}>
+            <ScrollView  horizontal = {true}>
             <View style={styles.container}>
                 <View>
                 <Text>{channel}</Text>
@@ -54,7 +54,9 @@ class ScheduleObject extends React.Component{
         return(
             schedules.map(tt=>{
                 return (
-                    <ScheduleList  schedule={tt} />
+                    <View style = {styles.program}>
+                    <ScheduleList schedule={tt} />
+                    </View>
                 );
             })
         );
@@ -67,7 +69,7 @@ class ScheduleList extends React.Component{
     render(){
         const {schedule} = this.props;
         return(
-            <View>
+            <View style = {styles.childcontainer}>
                 <Text>{schedule}</Text>    
             </View>
         );
@@ -82,7 +84,21 @@ const styles = StyleSheet.create(
             flexDirection : 'row',
             alignItems:'center',
             justifyContent:'space-between',
-            padding : 5,
+            padding : 0,
         },
+        program : {
+            flex : 1,
+            paddingLeft : 5,
+            paddingTop : 3,
+            paddingBottom : 3,
+            paddingRight : 5
+        },
+        childcontainer : {
+            flex:1,
+            backgroundColor : '#FFFFF0',
+            //borderWidth : 1,
+            //borderColor : "brown",
+            //borderStyle : "solid",
+        }
     }
 );
