@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import {StyleSheet} from 'react-native';
 
 export default function TimeTable({time}){
-    console.log(time);
+    //console.log(time);
     return(
         time.map(tt=>{
             return (
