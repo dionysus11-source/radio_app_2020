@@ -5,17 +5,20 @@ import {StyleSheet} from 'react-native';
 import Loading from "./Loading.js"
 import Schedule from "./Schedule.js"
 import axios from "axios";
-
+import { NavigationActions } from 'react-navigation';
 
 export default class Mainscreen extends React.Component{
     static navigationOptions = ({navigation}) =>{
         const {params={}} = navigation.state;
-        console.log(navigation);
         return {
-            headerLeft:<Icon name='ios-navigate' style={{paddingLeft:20}} />,
+            headerLeft: ()=>(
+                <Icon name='ios-navigate' onPress={()=> navigation.navigate('Details',{callback:params.setLocation})}  style={{paddingLeft:20}} />
+            ),
             headerTitleStyle : {alignSelf : 'center'},
-            title : "Radio",
-            headerRight:<Icon name='ios-refresh' onPress={params.refreshPage} style={{paddingRight:20}} />,
+            title : "Radio (" + params.location + ")",
+            headerRight: () =>(
+                <Icon name='ios-refresh' onPress={navigation.getParam('refreshPage')} style={{paddingRight:20}} />
+            ),
         };
     };
     state={
@@ -33,27 +36,38 @@ export default class Mainscreen extends React.Component{
     };
     refreshPage = () =>{
         const {location} = this.state;
-        console.log("refreshpage is called");
         this.setState({isLoading:true});
+        this.getRadio(location);
+    };
+    setLocation = (location) =>{
+        this.setState({location:location});
+        this.props.navigation.setParams({
+            location : location,
+        });
         this.getRadio(location);
     };
     componentDidMount(){
         const {location} = this.state;
+        //console.log(this);
         this.props.navigation.setParams({
             isLoading : this.state.isLoading,
             location : this.state.location,
             refreshPage : this.refreshPage,
+            setLocation : this.setLocation,
         });
         this.getRadio(location);
     };
     render(){
-        const {isLoading, programs, time} = this.state;
+        const {isLoading, programs, time, isModal} = this.state;
+        //console.log(this.state.location);
         return isLoading? <Loading />: 
         <ScrollView>
         <View>
             <Schedule programs={programs} />
         </View>
+
         </ScrollView>
+        
 
     }
 }
