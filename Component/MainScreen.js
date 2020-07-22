@@ -15,7 +15,7 @@ export default class Mainscreen extends React.Component{
                 <Icon name='ios-navigate' onPress={()=> navigation.navigate('Details',{callback:params.setLocation})}  style={{paddingLeft:20}} />
             ),
             headerTitleStyle : {alignSelf : 'center'},
-            title : "Radio",
+            title : "Radio (" + params.location + ")",
             headerRight: () =>(
                 <Icon name='ios-refresh' onPress={navigation.getParam('refreshPage')} style={{paddingRight:20}} />
             ),
@@ -41,7 +41,10 @@ export default class Mainscreen extends React.Component{
     };
     setLocation = (location) =>{
         this.setState({location:location});
-
+        this.props.navigation.setParams({
+            location : location,
+        });
+        this.getRadio(location);
     };
     componentDidMount(){
         const {location} = this.state;
