@@ -1,9 +1,10 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View, ActivityIndicator} from "react-native";
 
 export default function Loading(){
     return( <View style={styles.container}>
-        <Text style={styles.text}> Loading...</Text>
+        {/* <Text style={styles.text}> Loading...</Text> */}
+        <ActivityIndicator size="large"  />
     </View>);
 }
 
@@ -12,8 +13,6 @@ const styles = StyleSheet.create({
         flex : 1,
     justifyContent : "center", //"flex-end",
     alignItems : "center",
-    //paddingHorizontal: 30,
-    //paddingVertical : 100,
     backgroundColor : "white"//"#FDF6AA"
     },
     text:{
