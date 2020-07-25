@@ -4,7 +4,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
 export default class DetailScreen extends React.Component{
     render(){
         //console.log("DetailScreen");
-        this.props.navigation.state.params.callback("경기도");
+        //this.props.navigation.state.params.callback("경기도");
         return( <View style={styles.container}>
             <View style={styles.button}>
             <Text style={styles.text}> 청취지역 선택 </Text>
